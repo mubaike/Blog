@@ -1,0 +1,23 @@
+{
+  "id": "3935947",
+  "name": "blog",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "577365",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e752",
+      "unicode_decimal": 59218
+    },
+    {
+      "icon_id": "8565389",
+      "name": "icon_用户",
+      "font_class": "icon_yonghu",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    }
+  ]
+}
