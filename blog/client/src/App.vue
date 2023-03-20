@@ -4,25 +4,14 @@
   </n-config-provider>
 </template>
 
-<script >
+<script setup>
 import { NConfigProvider } from "naive-ui";
-
-export default {
-  components: {
-    NConfigProvider,
+const themeOverrides = {
+  common: {
+    primaryColor: "#61BCFF", //方法一：总体设置
   },
-  setup() {
-    const themeOverrides = {
-      common: {
-        primaryColor: "#61BCFF", //方法一：总体设置
-      },
-      Button: {
-        textColor: "#61BCFF",
-      }
-    };
-    return {
-      themeOverrides,
-    };
+  Button: {
+    textColor: "#61BCFF",
   },
 };
 </script>

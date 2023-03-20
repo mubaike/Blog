@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="footer">
-      <div>粤ICP备2022134112号-1</div>
+      <a href="https://beian.miit.gov.cn/" target="_blank"
+        >粤ICP备2022134112号-1</a
+      >
     </div>
   </div>
 </template>
@@ -14,8 +16,11 @@
   position: relative;
   text-align: center;
   line-height: 50px;
-  color: #ffffff;
   background-color: black;
   bottom: 0;
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
 }
 </style>

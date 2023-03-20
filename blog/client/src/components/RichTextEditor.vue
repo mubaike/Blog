@@ -1,55 +1,77 @@
 <!-- 富文本组件 -->
 <template>
   <div>
-      <Toolbar :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode"
-          style="border-bottom: 1px solid #ccc" />
-      <Editor :defaultConfig="editorConfig" :mode="mode" v-model="valueHtml" style="height: 400px; overflow-y: hidden"
-          @onCreated="handleCreated" @onChange="handleChange" />
+    <Toolbar
+      :editor="editorRef"
+      :defaultConfig="toolbarConfig"
+      :mode="mode"
+      style="border-bottom: 1px solid #ccc"
+    />
+    <Editor
+      :defaultConfig="editorConfig"
+      :mode="mode"
+      v-model="valueHtml"
+      style="height: 400px; overflow-y: hidden"
+      @onCreated="handleCreated"
+      @onChange="handleChange"
+    />
   </div>
 </template>
 
 <script setup>
-import '@wangeditor/editor/dist/css/style.css';
-import { ref, reactive, inject, onMounted, onBeforeUnmount, shallowRef } from 'vue'
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import "@wangeditor/editor/dist/css/style.css";
+import {
+  ref,
+  reactive,
+  inject,
+  onMounted,
+  onBeforeUnmount,
+  shallowRef,
+  withDirectives,
+} from "vue";
+import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 
-const server_url = inject("server_url")
+const server_url = inject("server_url");
 // 编辑器实例，必须用 shallowRef，重要！
 const editorRef = shallowRef();
-const toolbarConfig = { excludeKeys:["uploadVideo"] };
-const editorConfig = { placeholder: '请输入内容...' };
-editorConfig.MENU_CONF = {}
-editorConfig.MENU_CONF['uploadImage'] = {
+const toolbarConfig = { excludeKeys: ["uploadVideo"] };
+const editorConfig = { placeholder: "请输入内容..." };
+editorConfig.MENU_CONF = {};
+editorConfig.MENU_CONF["uploadImage"] = {
   base64LimitSize: 10 * 1024, // 10kb
-  server: server_url+'/upload/rich_editor_upload',
-}
-editorConfig.MENU_CONF['insertImage'] ={
-  parseImageSrc:(src) =>{
-      if(src.indexOf("http") !==0){
-          return `${server_url}${src}`
-      }
-      return src
-  }
-}
+  server: server_url + "/upload/rich_editor_upload",
+};
+editorConfig.MENU_CONF["insertImage"] = {
+  parseImageSrc: (src) => {
+    if (src.indexOf("http") !== 0) {
+      return `${server_url}${src}`;
+    }
+    return src;
+  },
+};
 
-const mode = ref("default")
-const valueHtml = ref("")
+const mode = ref("default");
+const valueHtml = ref("");
 
 const props = defineProps({
   modelValue: {
-      type: String,
-      default: ""
-  }
-})
+    type: String,
+    default: "",
+  },
+});
 
-const emit = defineEmits(["update:model-value"])
-let initFinished = false
+const emit = defineEmits(["update:model-value"]);
+let initFinished = false;
 
 onMounted(() => {
   setTimeout(() => {
       valueHtml.value = props.modelValue;
       initFinished = true;
   }, 50);
+  // $nextTick(() => {
+  //   valueHtml.value = props.modelValue;
+  //   initFinished = true;
+  // });
 });
 
 // 组件销毁时，也及时销毁编辑器，重要！
@@ -65,9 +87,10 @@ const handleCreated = (editor) => {
 };
 const handleChange = (editor) => {
   if (initFinished) {
-      emit("update:model-value", valueHtml.value)
+    emit("update:model-value", valueHtml.value);
   }
 };
+
 
 </script>
 
