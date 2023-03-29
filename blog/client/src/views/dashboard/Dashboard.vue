@@ -13,7 +13,7 @@
 
 <script setup>
 import { AdminStore } from "../../stores/AdminStore";
-import { ref, reactive, inject } from "vue";
+import { ref, reactive, inject, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
@@ -23,15 +23,29 @@ const axios = inject("axios");
 
 const adminStore = AdminStore();
 
+
+
 let menus = [
   { name: "文章管理", href: "/dashboard/article" },
   { name: "分类管理", href: "/dashboard/category" },
   { name: "退出", href: "logout" },
 ];
 
+onMounted(() => {
+  judeglogin();
+})
+
+//判断是否登录
+const judeglogin = () => {
+  if(!adminStore.token){
+    router.push("/")
+  }
+};
+
 const toPage = (menu) => {
   if (menu.href == "logout") {
     router.push("/")
+    adminStore.token = ""
   } else {
     router.push(menu.href)
   }

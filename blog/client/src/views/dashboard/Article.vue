@@ -104,7 +104,7 @@ let rules = {
 //分页数据
 const pageInfo = reactive({
   page: 1,
-  pageSize: 3,
+  pageSize: 10,
   pageCount: 0,
   count: 0,
 });
@@ -162,6 +162,9 @@ const loadBlogs = async () => {
     parseInt(pageInfo.count / pageInfo.pageSize) +
     (pageInfo.count % pageInfo.pageSize > 0 ? 1 : 0);
 };
+
+
+
 
 //添加博客
 const add = async () => {

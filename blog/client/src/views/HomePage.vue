@@ -1,41 +1,26 @@
 <template>
   <header-nav></header-nav>
+
   <div class="container">
-    <div class="nav">
-      <div>
-        <n-popselect
-          @update:value="searchByCategory"
-          v-model:value="selectedCategory"
-          :options="categortyOptions"
-          trigger="click"
-        >
-          <div>
-            分类<span>{{ categoryName }}</span>
-          </div>
-        </n-popselect>
+    <side-bar @categoryId="selCategory"></side-bar>
+    <div class="main">
+      <div
+        v-for="(blog, index) in blogListInfo"
+        :key="blog.id"
+        @click="toDetail(blog)"
+      >
+        <my-card :blog="blog"></my-card>
       </div>
-    </div>
-    <div
-      v-for="(blog, index) in blogListInfo"
-      style="margin-bottom: 15px; cursor: pointer"
-    >
-      <n-card :title="blog.title" @click="toDetail(blog)">
-        {{ blog.content }}
 
-        <template #footer>
-          <n-space align="center">
-            <div>发布时间：{{ blog.create_time }}</div>
-          </n-space>
-        </template>
-      </n-card>
+      <!--分页器-->
+      <n-pagination
+        @update:page="loadBlogs"
+        v-model:page="pageInfo.page"
+        :page-count="pageInfo.pageCount"
+        v-if="pageInfo.count > pageInfo.pageSize"
+      />
+      <n-divider />
     </div>
-
-    <n-pagination
-      @update:page="loadBlogs"
-      v-model:page="pageInfo.page"
-      :page-count="pageInfo.pageCount"
-    />
-    <n-divider />
   </div>
   <footer-nav></footer-nav>
 </template>
@@ -43,6 +28,8 @@
 <script setup>
 import HeaderNav from "../components/HeaderNav.vue";
 import FooterNav from "../components/FooterNav.vue";
+import SideBar from "../components/SideBar.vue";
+import MyCard from "../components/MyCard.vue";
 
 import { ref, reactive, inject, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -73,7 +60,6 @@ const pageInfo = reactive({
 });
 
 onMounted(() => {
-  loadCategorys();
   loadBlogs();
 });
 
@@ -106,33 +92,12 @@ const loadBlogs = async (page = 0) => {
   // console.log(res)
 };
 
-const categoryName = computed(() => {
-  //获取选中的分类
-  let selectedOption = categortyOptions.value.find((option) => {
-    return option.value == selectedCategory.value;
-  });
-  //返回分类的名称
-  return selectedOption ? selectedOption.label : "";
-});
-
-/**
- * 获取分类列表
- */
-const loadCategorys = async () => {
-  let res = await axios.get("/category/list");
-  categortyOptions.value = res.data.rows.map((item) => {
-    return {
-      label: item.name,
-      value: item.id,
-    };
-  });
-};
 
 /**
  * 选中分类
  */
-const searchByCategory = (categoryId) => {
-  pageInfo.categoryId = categoryId;
+const selCategory = (i) => {
+  pageInfo.categoryId = i;
   loadBlogs();
 };
 
@@ -144,32 +109,16 @@ const toDetail = (blog) => {
 </script>
 
 <style lang="scss" scoped>
-
 .container {
-  top: 75px;
-  width: 900px;
+  position: relative;
+  // top: 75px;
+  width: 1200px;
   margin: 75px auto;
   min-height: 800px;
-}
-
-.nav {
   display: flex;
-  font-size: 20px;
-  padding-top: 20px;
-  color: #64676a;
-
-  div {
-    cursor: pointer;
-    margin-right: 15px;
-
-    &:hover {
-      color: #f60;
-    }
-
-    span {
-      font-size: 12px;
-    }
-  }
 }
 
+.main {
+  padding-top: 20px;
+}
 </style>

@@ -1,19 +1,8 @@
 <template>
   <header-nav @listRouter="listRouter"></header-nav>
   <div class="container">
-    <div
-      v-for="(blog, index) in blogListInfo"
-      style="margin-bottom: 15px; cursor: pointer"
-    >
-      <n-card :title="blog.title" @click="toDetail(blog)">
-        {{ blog.content }}
-
-        <template #footer>
-          <n-space align="center">
-            <div>发布时间：{{ blog.create_time }}</div>
-          </n-space>
-        </template>
-      </n-card>
+    <div v-for="(blog, index) in blogListInfo" :key="blog.id">
+      <my-card :blog="blog" @click="toDetail(blog)"></my-card>
     </div>
     <n-pagination
       v-if="pageInfo.count != 0"
@@ -28,6 +17,7 @@
 
 <script setup>
 import HeaderNav from "../components/HeaderNav.vue";
+import MyCard from "../components/MyCard.vue";
 
 import { ref, reactive, inject, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
