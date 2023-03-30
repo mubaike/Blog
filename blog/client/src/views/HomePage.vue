@@ -98,6 +98,7 @@ const loadBlogs = async (page = 0) => {
  */
 const selCategory = (i) => {
   pageInfo.categoryId = i;
+  document.documentElement.scrollTop = 0
   loadBlogs();
 };
 

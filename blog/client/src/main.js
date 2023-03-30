@@ -29,7 +29,11 @@ app.provide("server_url", axios.defaults.baseURL)
 
 app.use(naive)
 app.use(createPinia())
+
 app.use(router)
+router.afterEach((to, from, next) => {
+    window.scrollTo(0, 0)
+  })
 
 
 const adminStore = AdminStore();
