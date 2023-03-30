@@ -1,7 +1,7 @@
 <template>
   <div>
     <n-tabs v-model:value="tabValue" justify-content="start" type="line">
-      <n-tab-pane name="list" tab="文章列表">
+      <n-tab-pane name="list" tab="文章列表" class="list">
         <div v-for="(blog, index) in blogListInfo" style="margin-bottom: 15px">
           <n-card :title="blog.title">
             {{ blog.content }}
@@ -16,13 +16,20 @@
           </n-card>
         </div>
 
-        <n-space>
+        <!-- <n-space>
           <div @click="toPage(pageNum)" v-for="pageNum in pageInfo.pageCount">
             <div :style="'color:' + (pageNum == pageInfo.page ? 'blue' : '')">
               {{ pageNum }}
             </div>
           </div>
-        </n-space>
+        </n-space> -->
+        <!--分页器-->
+        <n-pagination
+          @update:page="toPage"
+          v-model:page="pageInfo.page"
+          :page-count="pageInfo.pageCount"
+        />
+        <n-divider />
       </n-tab-pane>
       <n-tab-pane name="add" tab="添加文章">
         <n-form :rules="rules" :model="addArticle">
@@ -40,7 +47,10 @@
             />
           </n-form-item>
           <n-form-item label="内容">
-            <rich-text-editor v-model="addArticle.content"></rich-text-editor>
+            <rich-text-editor
+              class="content"
+              v-model="addArticle.content"
+            ></rich-text-editor>
           </n-form-item>
           <n-form-item label="">
             <n-button @click="add">提交</n-button>
@@ -63,6 +73,7 @@
           </n-form-item>
           <n-form-item label="内容">
             <rich-text-editor
+              class="content"
               v-model="updateArticle.content"
             ></rich-text-editor>
           </n-form-item>
@@ -104,7 +115,7 @@ let rules = {
 //分页数据
 const pageInfo = reactive({
   page: 1,
-  pageSize: 10,
+  pageSize: 4,
   pageCount: 0,
   count: 0,
 });
@@ -163,9 +174,6 @@ const loadBlogs = async () => {
     (pageInfo.count % pageInfo.pageSize > 0 ? 1 : 0);
 };
 
-
-
-
 //添加博客
 const add = async () => {
   if (addArticle.title != "") {
@@ -175,9 +183,9 @@ const add = async () => {
       loadBlogs();
       tabValue.value = "list";
 
-      addArticle.title = ''
-      addArticle.content = ''
-      addArticle.categoryId= 0
+      addArticle.title = "";
+      addArticle.content = "";
+      addArticle.categoryId = 0;
     } else {
       message.error(res.data.msg);
     }
@@ -211,9 +219,9 @@ const update = async () => {
       loadBlogs();
       tabValue.value = "list";
 
-      updateArticle.title = ''
-      updateArticle.content = ''
-      updateArticle.categoryId= 0
+      updateArticle.title = "";
+      updateArticle.content = "";
+      updateArticle.categoryId = 0;
     } else {
       message.error(res.data.msg);
     }
@@ -243,5 +251,11 @@ const toDelete = async (blog) => {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.content {
+  border: 1px solid #dfe0e6;
+  border-radius: 5px;
+  z-index: 1;
+  
+}
 </style>

@@ -15,7 +15,7 @@ const props = defineProps(['blog'])
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: auto;
+  width: 600px;
   height: 150px;
   padding: 10px 20px;
   margin-bottom: 15px;

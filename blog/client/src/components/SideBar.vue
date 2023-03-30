@@ -81,6 +81,7 @@ const emit = defineEmits(['categoryId']);
 <style lang="scss" scoped>
 .sidebar {
   width: 230px;
+  position:relative;
   height: 350px;
   margin-top: 15px;
   margin-right: 20px;

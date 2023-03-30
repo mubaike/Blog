@@ -14,8 +14,9 @@
 <style lang="scss" scoped>
 .footer {
   position: relative;
+  width: 100%;
   text-align: center;
-  line-height: 50px;
+  line-height: 40px;
   background-color: black;
   bottom: 0;
   a {

@@ -111,14 +111,15 @@ const toDetail = (blog) => {
 <style lang="scss" scoped>
 .container {
   position: relative;
+  display: flex;
   // top: 75px;
   width: 1200px;
-  margin: 75px auto;
-  min-height: 800px;
-  display: flex;
+  margin: 75px auto 0;
+  min-height: 900px;
 }
 
 .main {
-  padding-top: 20px;
+  padding-top: 15px;
 }
+
 </style>

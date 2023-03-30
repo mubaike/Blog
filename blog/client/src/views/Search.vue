@@ -5,15 +5,15 @@
       <my-card :blog="blog" @click="toDetail(blog)"></my-card>
     </div>
     <n-pagination
-      v-if="pageInfo.count != 0"
+      v-if="pageInfo.count > pageInfo.pageSize"
       @update:page="loadBlogs"
       v-model:page="pageInfo.page"
       :page-count="pageInfo.pageCount"
     />
-    <div v-else="pageInfo.count == 0">找不到更多啦</div>
+    <div v-if="pageInfo.count == 0">找不到更多啦</div>
     <!--分页-->
   </div>
-</template>
+</template> 
 
 <script setup>
 import HeaderNav from "../components/HeaderNav.vue";
@@ -93,5 +93,7 @@ const listRouter = () => {
 .container {
   width: 900px;
   margin: 100px auto;
+  min-height: 800px;
 }
+
 </style>

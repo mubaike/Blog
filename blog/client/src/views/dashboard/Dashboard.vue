@@ -5,7 +5,7 @@
         {{ menu.name }}
       </div>
     </div>
-    <div style="padding: 20px; width: 100%">
+    <div style="padding: 20px; width: 100%" class="rightview">
       <router-view></router-view>
     </div>
   </div>
@@ -56,6 +56,7 @@ const toPage = (menu) => {
 .main-panel {
   display: flex;
   color: #64676a;
+  min-width: 520px;
   max-width: 1500px;
   margin: 0 auto;
 }

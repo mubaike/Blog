@@ -51,7 +51,7 @@ const loadBlog = async () => {
 .container {
   .body {
     width: 50%;
-    min-width: 400px;
+    min-width: 500px;
     padding: 15px 30px 5px 30px;
     margin-top: 85px;
     margin-bottom: 20px;
@@ -84,23 +84,22 @@ const loadBlog = async () => {
       // }
 
       /* table 样式 */
-      ::v-deep table {
+      :deep(table) {
         border-top: 1px solid #ccc;
         border-left: 1px solid #ccc;
       }
-      ::v-deep table td,
-      ::v-deep table th {
+      :deep(table td), :deep(table th) {
         border-bottom: 1px solid #ccc;
         border-right: 1px solid #ccc;
         padding: 3px 5px;
       }
-      ::v-deep table th {
+      :deep(table th) {
         border-bottom: 2px solid #ccc;
         text-align: center;
       }
 
       //   /* blockquote 样式 引用样式 */
-      ::v-deep blockquote {
+      blockquote {
         display: block;
         border-left: 8px solid #d0e5f2;
         padding: 5px 10px;
@@ -110,27 +109,12 @@ const loadBlog = async () => {
         background-color: #f1f1f1;
       }
 
-      ::v-deep blockquote p {
-    padding: 10px 0;
-  }
-
-      // /* code 样式 */
-      // ::v-deep code {
-      //   display: inline-block;
-      //   *display: inline;
-      //   *zoom: 1;
-      //   background-color: #f1f1f1;
-      //   border-radius: 3px;
-      //   padding: 3px 5px;
-      //   margin: 0 3px;
-      // }
-      // ::v-deep pre code {
-      //   display: block;
-      // }
+      blockquote p {
+        padding: 10px 0;
+      }
 
       /* ul ol 样式 */
-      ::v-deep ul,
-      ::v-deep ol {
+      ul, ol {
         margin: 10px 0 10px 20px;
       }
     }
