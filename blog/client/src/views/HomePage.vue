@@ -1,6 +1,6 @@
 <template>
   <header-nav></header-nav>
-
+  
   <div class="container">
     <side-bar @categoryId="selCategory"></side-bar>
     <div class="main">
@@ -92,13 +92,12 @@ const loadBlogs = async (page = 0) => {
   // console.log(res)
 };
 
-
 /**
  * 选中分类
  */
 const selCategory = (i) => {
   pageInfo.categoryId = i;
-  document.documentElement.scrollTop = 0
+  document.documentElement.scrollTop = 0;
   loadBlogs();
 };
 
@@ -114,13 +113,14 @@ const toDetail = (blog) => {
   position: relative;
   display: flex;
   // top: 75px;
-  width: 1200px;
+  width: 1300px;
   margin: 75px auto 0;
   min-height: 900px;
+  align-items: flex-start;
 }
 
 .main {
   padding-top: 15px;
+  margin-left: 20px;
 }
-
 </style>
