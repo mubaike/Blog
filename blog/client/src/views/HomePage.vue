@@ -76,7 +76,7 @@ const loadBlogs = async (page = 0) => {
   let temp_rows = res.data.data.rows;
   // 处理获取的文章列表数据
   for (let row of temp_rows) {
-    row.content += "...";
+    // row.content += "...";
     // 把时间戳转换为年月日
     let d = new Date(row.create_time);
     row.create_time = `${d.getFullYear()}年${
@@ -89,7 +89,6 @@ const loadBlogs = async (page = 0) => {
   pageInfo.pageCount =
     parseInt(pageInfo.count / pageInfo.pageSize) +
     (pageInfo.count % pageInfo.pageSize > 0 ? 1 : 0);
-  // console.log(res)
 };
 
 /**

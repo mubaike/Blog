@@ -1,13 +1,33 @@
 <template>
   <div class="mycard">
     <div class="title">{{ blog.title }}</div>
-    <div class="content">{{ blog.content }}</div>
+    <div class="content">{{ newconst }}</div>
     <div class="footer">发布时间：{{ blog.create_time }}</div>
   </div>
 </template>
 
 <script setup>
+import { computed } from "vue"
+
 const props = defineProps(['blog'])
+const newconst = computed(() => {
+  let a = true;
+  let arr = [];
+  const s = props.blog.content
+  for(let i=0;i<s.length;i++){
+    if(s[i] == '<'){
+      a = false;
+    }else if(s[i-1] == '>'){
+      a = true
+    }
+    if(a){
+      arr.push(s[i])
+    }
+  }
+  
+  return arr.length ? arr.join('') + '...' : ''
+}
+)
 </script>
 
 <style lang="scss" scoped>
