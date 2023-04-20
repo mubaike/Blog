@@ -81,6 +81,7 @@ const toDetail = (blog) => {
   window.open(routeUrl.href, "_blank");
 };
 
+//接收头部组件传来的数据
 const listRouter = () => {
   setTimeout(() => {
     pageInfo.keyword = router.currentRoute.value.query.keyword || "";

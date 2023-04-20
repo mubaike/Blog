@@ -72,6 +72,8 @@ const login = async () => {
       localStorage.setItem("account", admin.account);
       localStorage.setItem("password", admin.password);
       localStorage.setItem("rember", admin.rember ? 1 : 0);
+    }else{
+      localStorage.clear()
     }
     router.push("/dashboard/article");
     message.info("登录成功");

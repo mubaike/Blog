@@ -1,6 +1,6 @@
 <!-- 富文本组件 -->
 <template>
-  <div>
+  <div >
     <Toolbar
       :editor="editorRef"
       :defaultConfig="toolbarConfig"
@@ -68,10 +68,6 @@ onMounted(() => {
       valueHtml.value = props.modelValue;
       initFinished = true;
   }, 50);
-  // $nextTick(() => {
-  //   valueHtml.value = props.modelValue;
-  //   initFinished = true;
-  // });
 });
 
 // 组件销毁时，也及时销毁编辑器，重要！

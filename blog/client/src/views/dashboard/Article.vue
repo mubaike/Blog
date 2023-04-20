@@ -194,11 +194,13 @@ const add = async () => {
   }
 };
 
+//分页
 const toPage = async (pageNum) => {
   pageInfo.page = pageNum;
   loadBlogs();
 };
 
+//上传博客
 const toUpdate = async (blog) => {
   tabValue.value = "update";
   let res = await axios.get("/blog/detail?id=" + blog.id);
