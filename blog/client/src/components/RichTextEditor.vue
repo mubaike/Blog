@@ -1,6 +1,6 @@
 <!-- 富文本组件 -->
 <template>
-  <div >
+  <div>
     <Toolbar
       :editor="editorRef"
       :defaultConfig="toolbarConfig"
@@ -28,6 +28,7 @@ import {
   onBeforeUnmount,
   shallowRef,
   withDirectives,
+  nextTick,
 } from "vue";
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
 
@@ -65,8 +66,8 @@ let initFinished = false;
 
 onMounted(() => {
   setTimeout(() => {
-      valueHtml.value = props.modelValue;
-      initFinished = true;
+    valueHtml.value = props.modelValue;
+    initFinished = true;
   }, 50);
 });
 
@@ -86,8 +87,6 @@ const handleChange = (editor) => {
     emit("update:model-value", valueHtml.value);
   }
 };
-
-
 </script>
 
 <style lang="scss" scoped>

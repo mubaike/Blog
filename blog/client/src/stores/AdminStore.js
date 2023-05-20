@@ -6,7 +6,7 @@ export const AdminStore = defineStore( "admin" ,{
         return {
             id: 0,
             account: "",
-            token: ""
+            token: sessionStorage.getItem("TOKEN")
         }
     },
     actions: {},

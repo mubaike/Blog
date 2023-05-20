@@ -41,16 +41,16 @@ const message = inject("message");
 const axios = inject("axios");
 const adminStore = AdminStore();
 
-let rules = {
-  account: [
-    { required: true, message: "请输入账号", trigger: "blur" },
-    { min: 3, max: 12, message: "账号长度在 3 到 12 个字符", trigger: "blur" },
-  ],
-  password: [
-    { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 6, max: 18, message: "密码长度在 6 到 18 个字符", trigger: "blur" },
-  ],
-};
+// let rules = {
+//   account: [
+//     { required: true, message: "请输入账号", trigger: "blur" },
+//     { min: 3, max: 12, message: "账号长度在 3 到 12 个字符", trigger: "blur" },
+//   ],
+//   password: [
+//     { required: true, message: "请输入密码", trigger: "blur" },
+//     { min: 6, max: 18, message: "密码长度在 6 到 18 个字符", trigger: "blur" },
+//   ],
+// };
 
 const admin = reactive({
   account: localStorage.getItem("account") || "",
@@ -65,6 +65,7 @@ const login = async () => {
   });
   if (result.data.code == 200) {
     adminStore.token = result.data.data.token;
+    sessionStorage.setItem("TOKEN",result.data.data.token)
     adminStore.account = result.data.data.account;
     adminStore.id = result.data.data.id;
 
