@@ -31,17 +31,6 @@ let menus = [
   { name: "退出", href: "logout" },
 ];
 
-onMounted(() => {
-  judeglogin();
-})
-
-//判断是否登录
-const judeglogin = () => {
-  if(!adminStore.token){
-    router.push("/")
-  }
-};
-
 const toPage = (menu) => {
   if (menu.href == "logout") {
     router.push("/")

@@ -21,7 +21,7 @@
             <input type="checkbox" v-model="admin.rember" />
             <label>记住我</label>
           </div>
-          <input class="but" type="button" value="Login"  @click="login" />
+          <input class="but" type="button" value="Login" @click="login" />
           <input class="but" type="button" value="cancel" @click="cancel" />
         </form>
       </div>
@@ -41,17 +41,6 @@ const message = inject("message");
 const axios = inject("axios");
 const adminStore = AdminStore();
 
-// let rules = {
-//   account: [
-//     { required: true, message: "请输入账号", trigger: "blur" },
-//     { min: 3, max: 12, message: "账号长度在 3 到 12 个字符", trigger: "blur" },
-//   ],
-//   password: [
-//     { required: true, message: "请输入密码", trigger: "blur" },
-//     { min: 6, max: 18, message: "密码长度在 6 到 18 个字符", trigger: "blur" },
-//   ],
-// };
-
 const admin = reactive({
   account: localStorage.getItem("account") || "",
   password: localStorage.getItem("password") || "",
@@ -65,7 +54,7 @@ const login = async () => {
   });
   if (result.data.code == 200) {
     adminStore.token = result.data.data.token;
-    sessionStorage.setItem("TOKEN",result.data.data.token)
+    sessionStorage.setItem("TOKEN", result.data.data.token);
     adminStore.account = result.data.data.account;
     adminStore.id = result.data.data.id;
 
@@ -73,8 +62,8 @@ const login = async () => {
       localStorage.setItem("account", admin.account);
       localStorage.setItem("password", admin.password);
       localStorage.setItem("rember", admin.rember ? 1 : 0);
-    }else{
-      localStorage.clear()
+    } else {
+      localStorage.clear();
     }
     router.push("/dashboard/article");
     message.info("登录成功");
@@ -97,8 +86,14 @@ const cancel = async () => {
   height: 100%;
   position: fixed;
   z-index: -1;
+  display: flex;
   // background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%) no-repeat;
   background: linear-gradient(120deg, #8ec5fc 0%, #b3cee9 100%) no-repeat;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+
   .box {
     display: flex;
     overflow: hidden;
@@ -107,7 +102,8 @@ const cancel = async () => {
     color: #fff;
     background-color: rgba(255, 255, 255, 60%);
     border-radius: 10px;
-    margin: 10% auto;
+    // margin: 10% auto;
+    margin: auto;
     box-shadow: 0 0 10 2 rgb(0 0 0 / 10%);
     .left {
       position: relative;
@@ -126,13 +122,16 @@ const cancel = async () => {
       h4 {
         color: #8ec5fc;
         font-size: 30px;
-        margin: 50px 0 0 0
+        margin: 50px 0 0 0;
       }
 
       form {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
+        width: 100%;
         .acc {
           outline: none;
           width: 50%;
@@ -146,27 +145,29 @@ const cancel = async () => {
           background-color: rgba(0, 0, 0, 0);
           padding: 1px 0 0 16px;
         }
-      }
-      .remember{
-        border: none;
-        margin: 15px 230px 0 0;
-        font-size: 15px;
-        color: #8ec5fc;
-      }
-      .but {
-        width: 60%;
-        height: 50px;
-        color: #f6f6f6;
-        background-image: linear-gradient(120deg, #8ec5fc 0%, #b3cee9 100%);
-        font-size: 14px;
-        border: none;
-        border-radius: 5px;
-        margin: 30px 0 0 50%;
-        transform: translateX(-50%);
-        :hover {
-          box-shadow: 0 0 20 -5 rgb(0 0 0 / 15%);
+        .remember {
+          border: none;
+          // margin: 15px 230px 0 0;
+          margin-top: 15px;
+          font-size: 15px;
+          color: #8ec5fc;
+        }
+        .but {
+          width: 40%;
+          height: 50px;
+          color: #f6f6f6;
+          background-image: linear-gradient(120deg, #8ec5fc 0%, #b3cee9 100%);
+          font-size: 14px;
+          border: none;
+          border-radius: 5px;
+          margin: 15px auto;
+          // margin-top: 30px;
+          :hover {
+            box-shadow: 0 0 20 -5 rgb(0 0 0 / 15%);
+          }
         }
       }
+      
     }
   }
 }

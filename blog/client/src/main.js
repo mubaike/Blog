@@ -31,6 +31,20 @@ app.use(naive)
 app.use(createPinia())
 
 app.use(router)
+
+router.beforeEach((to,from,next) => {
+    if(to.meta.istoken){
+        //需要token才能过去
+        if(AdminStore().token){
+            next()
+        }else{
+            router.push('/login')
+        }
+    }else{
+        next();
+    }
+})
+
 router.afterEach((to, from, next) => {
     window.scrollTo(0, 0)
   })
